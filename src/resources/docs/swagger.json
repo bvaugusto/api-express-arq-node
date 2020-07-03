@@ -1,0 +1,183 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Exercício Prático 03 - API com Expressjs",
+    "version": "1.0.0",
+    "title": "Exercício Prático 03 - API com Expressjs"
+  },
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/v1/calculator/": {
+      "get": {
+        "tags": [
+          "Calculadora"
+        ],
+        "summary": "Realiza operações matemáticas",
+        "description": "Realiza operações matemáticas",
+        "operationId": "getQuery",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operator",
+            "in": "query",
+            "description": "operator",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "param1",
+            "in": "query",
+            "description": "param1",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "param2",
+            "in": "query",
+            "description": "param2",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CalculatorResponse"
+            }
+          },
+          "422": {
+            "description": "Generic message"
+          }
+        }
+      }
+    },
+    "/v1/calculator/{operator}/{param1}/{param2}": {
+      "get": {
+        "tags": [
+          "Calculadora"
+        ],
+        "summary": "Realiza operações matemáticas",
+        "description": "Realiza operações matemáticas",
+        "operationId": "getParams",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operator",
+            "in": "path",
+            "description": "operator",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "param1",
+            "in": "path",
+            "description": "param1",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "param2",
+            "in": "path",
+            "description": "param2",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CalculatorResponse"
+            }
+          },
+          "422": {
+            "description": "Generic message"
+          }
+        }
+      }
+    },
+    "/v1/calculator": {
+      "post": {
+        "tags": [
+          "Calculadora"
+        ],
+        "summary": "Realiza operações matemáticas",
+        "description": "Realiza operações matemáticas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "post",
+            "required": true,
+            "description": "Calculator payload",
+            "schema": {
+              "$ref": "#/definitions/CalculatorRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CalculatorResponse"
+            }
+          },
+          "422": {
+            "description": "Generic message"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CalculatorRequest": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "type": "string",
+          "example": "addition"
+        },
+        "param1": {
+          "type": "number",
+          "example": 2
+        },
+        "param2": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
+    "CalculatorResponse": {
+      "type": "string",
+      "example": 4
+    },
+    "operator": {
+      "type": "object",
+      "properties": {
+        "addition": {
+          "type": "string"
+        },
+        "subtraction": {
+          "type": "string"
+        },
+        "multiplication": {
+          "type": "string"
+        },
+        "division": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -26,7 +26,7 @@ class CalculatorController {
 
   async post(req, res) {
     try {
-      const result = await this.calculatorService.calculator(req.query);
+      const result = await this.calculatorService.calculator(req.body);
       
       return res.status(200).json(result);
     } catch (error) {
