@@ -1,0 +1,1 @@
+module.exports = class ValidateParamsError extends Error {}
