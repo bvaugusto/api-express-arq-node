@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Exercício Prático 03 - API com Expressjs",
     "version": "1.0.0",
-    "title": "Exercício Prático 03 - API com Expressjs"
+    "title": "Exercício Prático 03 - API com Expressjs",
+    "description": "Arquitetura de software na plataforma Node.js - Bruno Vasconcellos Augusto"
   },
   "basePath": "/",
   "schemes": [
