@@ -51,6 +51,15 @@ describe('CalculatorController', () => {
           res.body.should.be.eql('Valor invalido para o divisor');
         });
     });
+
+    it('should validate params 422', async () => {
+      chai.request(server)
+        .get('/v1/calculator?operator=division&param1=asdf&param2=asdf')
+        .end((err, res) => {
+          res.statusCode.should.eql(422);
+          res.body.should.be.eql('É permitido somente valor numérico!');
+        });
+    });
   });
 
   describe('getParams', () => {
@@ -96,6 +105,15 @@ describe('CalculatorController', () => {
         .end((err, res) => {
           res.statusCode.should.eql(422);
           res.body.should.be.eql('Valor invalido para o divisor');
+        });
+    });
+
+    it('should validate params 422', async () => {
+      chai.request(server)
+        .get('/v1/calculator/division/asdf/asdf')
+        .end((err, res) => {
+          res.statusCode.should.eql(422);
+          res.body.should.be.eql('É permitido somente valor numérico!');
         });
     });
   });
@@ -148,6 +166,16 @@ describe('CalculatorController', () => {
         .end((err, res) => {
           res.statusCode.should.eql(422);
           res.body.should.be.eql('Valor invalido para o divisor');
+        });
+    });
+
+    it('should validate params 422', async () => {
+      chai.request(server)
+        .post('/v1/calculator')
+        .send({ operator: 'division', param1: 'asdf', param2: 'asdf' })
+        .end((err, res) => {
+          res.statusCode.should.eql(422);
+          res.body.should.be.eql('É permitido somente valor numérico!');
         });
     });
   });

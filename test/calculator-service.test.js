@@ -1,6 +1,7 @@
 const assert = require('assert');
 const CalculatorService = require('../src/services/calculator-service');
 const CalculatorError = require('../src/errors/calculator-error');
+const ValidateParamsError = require('../src/errors/validate-params-error');
 
 describe('calculatorService', () => {
   let calculatorService, params;
@@ -45,6 +46,13 @@ describe('calculatorService', () => {
       params = { operator: 'div', param1: 10, param2: 0 };
       
       assert.rejects(async() => await calculatorService.calculator(params), error, "Operador inválido!");
+    });
+
+    it('should operator not found', async () => {
+      const error = new ValidateParamsError("É permitido somente valor numérico!");
+      params = { operator: 'div', param1: 'asdf', param2: 'asdf' };
+      
+      assert.rejects(async() => await calculatorService.calculator(params), error, "É permitido somente valor numérico!");
     });
   })
 })

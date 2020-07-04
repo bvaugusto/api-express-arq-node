@@ -7,13 +7,13 @@ class calculatorService {
   async calculator(params) {
     const { operator } = params;
     let { param1, param2 } = params;
-
-    if (!(typeof param1 === "number" && typeof param2 === "number")) {
-      throw new ValidateParamsError("É permitido somente valor numérico!");
-    }
     
     param1 = parseInt(param1, 10);
     param2 = parseInt(param2, 10);
+
+    if (isNaN(param1) || isNaN(param2)) {
+      throw new ValidateParamsError("É permitido somente valor numérico!");
+    }
 
     switch (operator) {
       case 'addition':
