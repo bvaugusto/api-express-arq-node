@@ -9,7 +9,7 @@ describe('CalculatorController', () => {
   describe('getQuery', () => {
     it('should addition 200', async () => {
       chai.request(server)
-        .get('/v1/calculator?operator=addition&var1=10&var2=2')
+        .get('/v1/calculator?operator=addition&param1=10&param2=2')
         .end((err, res) => {
           res.statusCode.should.eql(200);
           res.body.should.be.eql(12);
@@ -18,7 +18,7 @@ describe('CalculatorController', () => {
 
     it('should subtraction 200', async () => {
       chai.request(server)
-        .get('/v1/calculator?operator=subtraction&var1=10&var2=2')
+        .get('/v1/calculator?operator=subtraction&param1=10&param2=2')
         .end((err, res) => {
           res.statusCode.should.eql(200);
           res.body.should.be.eql(8);
@@ -27,7 +27,7 @@ describe('CalculatorController', () => {
 
     it('should multiplication 200', async () => {
       chai.request(server)
-        .get('/v1/calculator?operator=multiplication&var1=10&var2=2')
+        .get('/v1/calculator?operator=multiplication&param1=10&param2=2')
         .end((err, res) => {
           res.statusCode.should.eql(200);
           res.body.should.be.eql(20);
@@ -36,7 +36,7 @@ describe('CalculatorController', () => {
 
     it('should division 200', async () => {
       chai.request(server)
-        .get('/v1/calculator?operator=division&var1=10&var2=2')
+        .get('/v1/calculator?operator=division&param1=10&param2=2')
         .end((err, res) => {
           res.statusCode.should.eql(200);
           res.body.should.be.eql(5);
@@ -45,11 +45,110 @@ describe('CalculatorController', () => {
 
     it('should division 422', async () => {
       chai.request(server)
-        .get('/v1/calculator?operator=division&var1=10&var2=0')
+        .get('/v1/calculator?operator=division&param1=10&param2=0')
         .end((err, res) => {
           res.statusCode.should.eql(422);
           res.body.should.be.eql('Valor invalido para o divisor');
         });
     });
-  })
+  });
+
+  describe('getParams', () => {
+    it('should addition 200', async () => {
+      chai.request(server)
+        .get('/v1/calculator/addition/10/2')
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(12);
+        });
+    });
+
+    it('should subtraction 200', async () => {
+      chai.request(server)
+        .get('/v1/calculator/subtraction/10/2')
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(8);
+        });
+    });
+
+    it('should multiplication 200', async () => {
+      chai.request(server)
+        .get('/v1/calculator/multiplication/10/2')
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(20);
+        });
+    });
+
+    it('should division 200', async () => {
+      chai.request(server)
+        .get('/v1/calculator/division/10/2')
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(5);
+        });
+    });
+
+    it('should division 422', async () => {
+      chai.request(server)
+        .get('/v1/calculator/division/10/0')
+        .end((err, res) => {
+          res.statusCode.should.eql(422);
+          res.body.should.be.eql('Valor invalido para o divisor');
+        });
+    });
+  });
+
+  describe('post', () => {
+    it('should addition 200', async () => {
+      chai.request(server)
+        .post('/v1/calculator')
+        .send({ operator: 'addition', param1: 10, param2: 2 })
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(12);
+        });
+    });
+
+    it('should subtraction 200', async () => {
+      chai.request(server)
+        .post('/v1/calculator')
+        .send({ operator: 'subtraction', param1: 10, param2: 2 })
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(8);
+        });
+    });
+
+    it('should multiplication 200', async () => {
+      chai.request(server)
+        .post('/v1/calculator')
+        .send({ operator: 'multiplication', param1: 10, param2: 2 })
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(20);
+        });
+    });
+
+    it('should division 200', async () => {
+      chai.request(server)
+        .post('/v1/calculator')
+        .send({ operator: 'division', param1: 10, param2: 2 })
+        .end((err, res) => {
+          res.statusCode.should.eql(200);
+          res.body.should.be.eql(5);
+        });
+    });
+
+    it('should division 422', async () => {
+      chai.request(server)
+        .post('/v1/calculator')
+        .send({ operator: 'division', param1: 10, param2: 0 })
+        .end((err, res) => {
+          res.statusCode.should.eql(422);
+          res.body.should.be.eql('Valor invalido para o divisor');
+        });
+    });
+  });
 })
